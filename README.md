@@ -30,7 +30,7 @@ func main() {
     fmt.Println(cc.USD == cc.Get()) // Prints true
     
     // Set Valid
-    cc.MustSet(Const("CUSTOM"))
+    cc.MustSet(cc.Custom)
     
     // Set invalid
     err := cc.Set(Const("Random"))
