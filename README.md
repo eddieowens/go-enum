@@ -43,8 +43,8 @@ func main() {
     }
     out, err := json.Marshal(c)
     fmt.Println(string(out)) // Prints "{"currency_code":"USD","amount":5}"
-	
-	// Unmarshal valid value
+    
+    // Unmarshal valid value
     var money Money
 
     json.Unmarshal([]byte("{\"currency_code\":\"USD\",\"amount\":5}"), &money)
@@ -52,7 +52,7 @@ func main() {
     
     fmt.Println(money) // Prints "{USD 5}"
     
-	// Unmarshal invalid value
+    // Unmarshal invalid value
     var money Money
 
     json.Unmarshal([]byte("{\"currency_code\":\"Random\",\"amount\":5}"), &money)
@@ -60,9 +60,9 @@ func main() {
     
     fmt.Println(err.Error()) // Prints "Random is not a valid enum"
     
-	// Stringify
-	cc = enum.MustConstruct(new(CurrencyCodes), enum.Const("CUSTOM")).(*CurrencyCodes)
-	fmt.Println(cc) // Prints "CUSTOM"
+    // Stringify
+    cc = enum.MustConstruct(new(CurrencyCodes), enum.Const("CUSTOM")).(*CurrencyCodes)
+    fmt.Println(cc) // Prints "CUSTOM"
 }
 ```
 
