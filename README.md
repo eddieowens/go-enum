@@ -36,6 +36,12 @@ func main() {
     err := cc.Set(Const("Random"))
     fmt.Println(err.Error()) // Prints "Random is not a valid enum"
     
+    // Get all possible enums
+    consts := cc.GetAll()
+    for _, c := range consts{
+    	...
+    }
+    
     // Marshal
     m := Money{
         CurrencyCode: *cc,
