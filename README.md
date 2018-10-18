@@ -72,7 +72,12 @@ func main() {
 }
 ```
 
-## Const type
+## To note
+### Unmarshalling
+All unmarshalling needs to be followed with a call to `enum.Validate(...)`. If it is not
+the value placed on the enum may not be valid and the enum will not function as expected.
+
+### Const type
 The name of the field on the struct will be the default value for the enum const.
 For example with `CurrencyCodes.USD` the `Const` value is "USD". In order to customize
 this value, add the tag `enum:"<NAME>"` like in `CurrencyCodes.Custom`
