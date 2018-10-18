@@ -24,13 +24,9 @@ const enumNotConstructedErrorMsg = "cannot set a value on an enum that has not b
 const enumNotNilErrorMsg = "cannot set a value on an enum that has not be constructed"
 
 type Enummer interface {
-	// Gets the value stored on the enum
 	Get() Const
-	// Set the value stored on the enum. Returns an error if value is invalid
 	Set(c Const) error
-	// Set the value stored on the enum. Panics if the value is invalid
 	MustSet(c Const)
-	// A list of all possible Consts on the enum
 	GetAll() []Const
 	// Sets the value without any checks. This is a dangerous method and should pretty
 	// much never be used but if you do, USE WITH CAUTION.
@@ -63,6 +59,7 @@ func (e *Enum) unsafeAdd(c Const) {
 	}
 }
 
+// A list of all possible Consts on the enum
 func (e *Enum) GetAll() []Const {
 	return e.vals
 }
@@ -96,10 +93,12 @@ func (e Enum) MarshalJSON() ([]byte, error) {
 	return []byte(strconv.Quote(string(e.val))), nil
 }
 
+// Gets the value stored on the enum
 func (e *Enum) Get() Const {
 	return e.val
 }
 
+// Set the value stored on the enum. Returns an error if value is invalid
 func (e *Enum) Set(c Const) error {
 	if e.vals != nil {
 		if contains(e.GetAll(), c) {
@@ -113,6 +112,7 @@ func (e *Enum) Set(c Const) error {
 	}
 }
 
+// Set the value stored on the enum. Panics if the value is invalid
 func (e *Enum) MustSet(s Const) {
 	err := e.Set(s)
 	if err != nil {
