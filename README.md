@@ -16,33 +16,33 @@ type CurrencyCodes struct {
 	Custom enum.Const `enum:"CUSTOM"`
 }
 
+type Money struct {
+    CurrencyCode CurrencyCode `json:"currency_code"`
+    Amount       int          `json:"amount"`
+}
+
 func main() {
-	// Create
-	cc := enum.New(new(CurrencyCodes)).(*CurrencyCodes)
-	
-	// Instantiate then get
-	cc = enum.MustConstruct(new(CurrencyCodes), enum.Const("USD")).(*CurrencyCodes)
-	fmt.Println(cc.USD == cc.Get()) // Prints true
-	
-	// Set Valid
-	cc.MustSet(Const("CUSTOM"))
-	
-	// Set invalid
-	err := cc.Set(Const("Random"))
-	fmt.Println(err.Error()) // Prints "Random is not a valid enum"
-	
-	// Marshal
-    type Money struct {
-        CurrencyCode CurrencyCode `json:"currency_code"`
-        Amount       int          `json:"amount"`
+    // Create
+    cc := enum.New(new(CurrencyCodes)).(*CurrencyCodes)
+    
+    // Instantiate then get
+    cc = enum.MustConstruct(new(CurrencyCodes), enum.Const("USD")).(*CurrencyCodes)
+    fmt.Println(cc.USD == cc.Get()) // Prints true
+    
+    // Set Valid
+    cc.MustSet(Const("CUSTOM"))
+    
+    // Set invalid
+    err := cc.Set(Const("Random"))
+    fmt.Println(err.Error()) // Prints "Random is not a valid enum"
+    
+    // Marshal
+    m := Money{
+        CurrencyCode: *cc,
+        Amount: 5,
     }
-	
-	m := Money{
-		CurrencyCode: *cc,
-		Amount: 5,
-	}
-	out, err := json.Marshal(c)
-	fmt.Println(string(out)) // Prints "{"currency_code":"USD","amount":5}"
+    out, err := json.Marshal(c)
+    fmt.Println(string(out)) // Prints "{"currency_code":"USD","amount":5}"
 	
 	// Unmarshal valid value
     var money Money
