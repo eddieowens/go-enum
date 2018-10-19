@@ -7,6 +7,8 @@ go get github.com/eddieowens/go-enum
 ```
 
 ## Usage
+### Basic
+The following creates an enum of currency codes and uses them on the `Money` struct
 ```go
 type CurrencyCodes struct {
     enum.Enum
@@ -20,19 +22,50 @@ type Money struct {
     CurrencyCode CurrencyCode `json:"currency_code"`
     Amount       int          `json:"amount"`
 }
+```
 
+To create a currency code you must use one of the following functions
+```go
+// Instantiate with a provided value and panic if the value is not valid
+cc := enum.MustConstruct(new(CurrencyCodes), enum.Const("USD")).(*CurrencyCodes)
+
+// Instantiate with a provided value and return an error if the value is not valid
+cc, err := enum.Construct(new(CurrencyCodes), enum.Const("USD")).(*CurrencyCodes)
+
+// Create a new enum with no value set
+cc := enum.New(new(CurrencyCodes)).(*CurrencyCodes)
+```
+
+To get the value and compare it with another
+```go
+cc.Get() == cc.USD
+```
+
+To set the value, use either of the following
+```go
+// If the value is invalid,  an error is returned
+err := cc.Set(cc.CAD)
+
+// If the value is invalid, a panic occurs
+cc.MustSet(cc.CAD)
+```
+
+
+
+### Complete example
+```go
 func main() {
-    // Create
+    // Create without a value
     cc := enum.New(new(CurrencyCodes)).(*CurrencyCodes)
     
-    // Instantiate then get
+    // Instantiate with a provided value then get it
     cc = enum.MustConstruct(new(CurrencyCodes), enum.Const("USD")).(*CurrencyCodes)
     fmt.Println(cc.USD == cc.Get()) // Prints true
     
-    // Set Valid
+    // Set valid value
     cc.MustSet(cc.Custom)
     
-    // Set invalid
+    // Set invalid value
     err := cc.Set(Const("Random"))
     fmt.Println(err.Error()) // Prints "Random is not a valid enum"
     
