@@ -41,16 +41,17 @@ To get the value and compare it with another
 cc.Get() == cc.USD
 ```
 
-To set the value, use either of the following
+To set the value, use any of the following
 ```go
 // If the value is invalid,  an error is returned
 err := cc.Set(cc.CAD)
 
 // If the value is invalid, a panic occurs
 cc.MustSet(cc.CAD)
+
+// Set the value to a `Const` type
+cc.Set(Const("EUR"))
 ```
-
-
 
 ### Complete example
 ```go
