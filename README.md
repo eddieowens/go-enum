@@ -9,11 +9,11 @@ go get github.com/eddieowens/go-enum
 ## Usage
 ```go
 type CurrencyCodes struct {
-	enum.Enum
-	USD    enum.Const
-	EUR    enum.Const
-	CAD    enum.Const
-	Custom enum.Const `enum:"CUSTOM"`
+    enum.Enum
+    USD    enum.Const
+    EUR    enum.Const
+    CAD    enum.Const
+    Custom enum.Const `enum:"CUSTOM"`
 }
 
 type Money struct {
