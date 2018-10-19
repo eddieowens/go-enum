@@ -84,5 +84,5 @@ this value, add the tag `enum:"<NAME>"` like in `CurrencyCodes.Custom`
 
 ## [Docs](https://godoc.org/github.com/eddieowens/go-enum)
 
-## [License](https://github.com/eddieowens/go-enum/blob/master/LICENSE)
-
+## License
+[MIT](https://github.com/eddieowens/go-enum/blob/master/LICENSE)
